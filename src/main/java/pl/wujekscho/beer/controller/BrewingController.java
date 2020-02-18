@@ -11,7 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/brewing")
+@Path("/brewings")
 @RequestScoped
 @Transactional
 @Produces(MediaType.APPLICATION_JSON)
