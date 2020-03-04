@@ -1,28 +1,23 @@
 package pl.wujekscho.beer.entity;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
-public class Brewing {
+@ToString
+public class Brewing extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-    @NotNull
+    @Column(unique = true)
     public String name;
-    @NotNull
-    @Positive
+    public String style;
     public Double gravity;
-    @NotNull
-    @Positive
     public Double volume;
 }
