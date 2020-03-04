@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class RestResponse { //todo zastosować wzorzec budowniczego
+public class ResponseBuilder {
     Response.Status status = Response.Status.OK;
     String created = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     Map<String, String> errorMessages;
@@ -25,45 +25,45 @@ public class RestResponse { //todo zastosować wzorzec budowniczego
     List<ResteasyConstraintViolation> returnValueViolations;
     Object entity;
 
-    public RestResponse setStatus(Response.Status status) {
+    public ResponseBuilder setStatus(Response.Status status) {
         this.status = status;
         return this;
     }
 
-    public RestResponse setErrorMessages(Map<String, String> errorMessages) {
+    public ResponseBuilder setErrorMessages(Map<String, String> errorMessages) {
         if (!errorMessages.isEmpty()) {
             this.errorMessages = errorMessages;
         }
         return this;
     }
 
-    public RestResponse setEntity(Object entity) {
+    public ResponseBuilder setEntity(Object entity) {
         this.entity = entity;
         return this;
     }
 
-    public RestResponse setPropertyViolations(List<ResteasyConstraintViolation> propertyViolations) {
+    public ResponseBuilder setPropertyViolations(List<ResteasyConstraintViolation> propertyViolations) {
         if (!propertyViolations.isEmpty()) {
             this.propertyViolations = propertyViolations;
         }
         return this;
     }
 
-    public RestResponse setClassViolations(List<ResteasyConstraintViolation> classViolations) {
+    public ResponseBuilder setClassViolations(List<ResteasyConstraintViolation> classViolations) {
         if (!classViolations.isEmpty()) {
             this.classViolations = classViolations;
         }
         return this;
     }
 
-    public RestResponse setParameterViolations(List<ResteasyConstraintViolation> parameterViolations) {
+    public ResponseBuilder setParameterViolations(List<ResteasyConstraintViolation> parameterViolations) {
         if (!parameterViolations.isEmpty()) {
             this.parameterViolations = parameterViolations;
         }
         return this;
     }
 
-    public RestResponse setReturnValueViolations(List<ResteasyConstraintViolation> returnValueViolations) {
+    public ResponseBuilder setReturnValueViolations(List<ResteasyConstraintViolation> returnValueViolations) {
         if (!returnValueViolations.isEmpty()) {
             this.returnValueViolations = returnValueViolations;
         }
@@ -71,7 +71,7 @@ public class RestResponse { //todo zastosować wzorzec budowniczego
     }
 
     @JsonbTransient
-    public RestResponse addErrorMessage(String error, String message) {
+    public ResponseBuilder addErrorMessage(String error, String message) {
         if (errorMessages == null) {
             this.errorMessages = new LinkedHashMap<>();
         }
@@ -80,7 +80,7 @@ public class RestResponse { //todo zastosować wzorzec budowniczego
     }
 
     @JsonbTransient
-    public Response getResponse() {
+    public Response buildResponse() {
         return Response
                 .status(this.status.getStatusCode())
                 .entity(this)

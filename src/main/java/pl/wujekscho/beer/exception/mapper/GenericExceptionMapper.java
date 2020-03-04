@@ -1,7 +1,7 @@
 package pl.wujekscho.beer.exception.mapper;
 
 import lombok.extern.slf4j.Slf4j;
-import pl.wujekscho.beer.dto.RestResponse;
+import pl.wujekscho.beer.dto.ResponseBuilder;
 import pl.wujekscho.beer.exception.NoDBResultException;
 
 import javax.ws.rs.core.Response;
@@ -27,9 +27,9 @@ public class GenericExceptionMapper implements ExceptionMapper<RuntimeException>
             errorMessages.put(exception.getClass().getSimpleName(), exception.getMessage());
         }
 
-        return new RestResponse()
+        return new ResponseBuilder()
                 .setErrorMessages(errorMessages.isEmpty() ? null : errorMessages)
                 .setStatus(status)
-                .getResponse();
+                .buildResponse();
     }
 }

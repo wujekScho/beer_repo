@@ -1,7 +1,7 @@
 package pl.wujekscho.beer.controller;
 
 import pl.wujekscho.beer.dto.BrewingDto;
-import pl.wujekscho.beer.dto.RestResponse;
+import pl.wujekscho.beer.dto.ResponseBuilder;
 import pl.wujekscho.beer.dto.mapper.BrewingMapper;
 import pl.wujekscho.beer.entity.Brewing;
 import pl.wujekscho.beer.service.BrewingService;
@@ -33,27 +33,27 @@ public class BrewingController {
         List<BrewingDto> dtos = brewingService.getAll().stream()
                 .map(brewing -> brewingMapper.toDto(brewing))
                 .collect(Collectors.toList());
-        return new RestResponse()
+        return new ResponseBuilder()
                 .setEntity(dtos)
-                .getResponse();
+                .buildResponse();
     }
 
     @GET
     @Path("/{brewingId}")
     public Response getById(@PathParam("brewingId") Long brewingId) {
         BrewingDto dto = brewingMapper.toDto(brewingService.getById(brewingId));
-        return new RestResponse()
+        return new ResponseBuilder()
                 .setEntity(dto)
-                .getResponse();
+                .buildResponse();
     }
 
     @POST
     public Response save(@Valid BrewingDto dto) {
         Brewing entity = brewingMapper.toEntity(dto);
         brewingService.save(entity);
-        return new RestResponse()
+        return new ResponseBuilder()
                 .setStatus(Response.Status.CREATED)
                 .setEntity(entity)
-                .getResponse();
+                .buildResponse();
     }
 }
