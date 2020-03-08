@@ -10,6 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -40,7 +41,7 @@ public class BrewingController {
 
     @GET
     @Path("/{brewingId}")
-    public Response getById(@PathParam("brewingId") Long brewingId) {
+    public Response getById(@PathParam("brewingId") @Positive Long brewingId) {
         BrewingDto dto = brewingMapper.toDto(brewingService.getById(brewingId));
         return new ResponseBuilder()
                 .setEntity(dto)
@@ -50,10 +51,19 @@ public class BrewingController {
     @POST
     public Response save(@Valid BrewingDto dto) {
         Brewing entity = brewingMapper.toEntity(dto);
-        brewingService.save(entity);
+        Brewing brewing = brewingService.save(entity);
         return new ResponseBuilder()
                 .setStatus(Response.Status.CREATED)
-                .setEntity(entity)
+                .setEntity(brewing)
+                .buildResponse();
+    }
+
+    @DELETE
+    @Path("/{brewingId}")
+    public Response delete(@PathParam("brewingId") @Positive Long brewingId) {
+        brewingService.delete(brewingId);
+        return new ResponseBuilder()
+                .setStatus(Response.Status.NO_CONTENT)
                 .buildResponse();
     }
 }

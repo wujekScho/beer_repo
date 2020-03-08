@@ -1,14 +1,18 @@
 package pl.wujekscho.beer.service;
 
+import lombok.extern.slf4j.Slf4j;
 import pl.wujekscho.beer.entity.Brewing;
 import pl.wujekscho.beer.exception.NoDBResultException;
 import pl.wujekscho.beer.repository.BrewingRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
+@Slf4j
+@Transactional
 public class BrewingService {
     @Inject
     BrewingRepository brewingRepository;
@@ -16,18 +20,22 @@ public class BrewingService {
     public List<Brewing> getAll() {
         List<Brewing> list = brewingRepository.findAll().list();
         if (list.isEmpty()) {
+            log.warn("No brewing found.");
             throw new NoDBResultException();
         }
         return list;
     }
 
-    public void save(Brewing brewing) {
+    public Brewing save(Brewing brewing) {
         brewingRepository.persist(brewing);
+        log.info("Successfully persisted brewing: {}", brewing);
+        return brewing;
     }
 
     public Brewing getById(Long brewingId) {
         Brewing byId = brewingRepository.findById(brewingId);
         if (byId == null) {
+            log.warn("No brewing found of id: {}", brewingId);
             throw new NoDBResultException();
         }
         return byId;
@@ -37,7 +45,13 @@ public class BrewingService {
         return brewingRepository.find("name", name).firstResult() != null;
     }
 
-    public List<Brewing> getByName(String name) {
-        return brewingRepository.find("name", name).list();
+    public Brewing getByName(String name) {
+        return brewingRepository.find("name", name).firstResult();
+    }
+
+    public void delete(Long brewingId) {
+        Brewing brewing = getById(brewingId);
+        brewingRepository.delete(brewing);
+        log.warn("Deleted brewing of id: {}", brewingId);
     }
 }

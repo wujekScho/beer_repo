@@ -2,6 +2,7 @@ package pl.wujekscho.beer.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.jboss.resteasy.api.validation.ResteasyConstraintViolation;
 
 import javax.json.bind.annotation.JsonbTransient;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @Getter
 @Setter
+@ToString
 public class ResponseBuilder {
     Response.Status status = Response.Status.OK;
     String created = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
