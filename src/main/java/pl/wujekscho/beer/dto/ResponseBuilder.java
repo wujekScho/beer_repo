@@ -18,14 +18,14 @@ import java.util.Map;
 @Setter
 @ToString
 public class ResponseBuilder {
-    Response.Status status = Response.Status.OK;
-    String created = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-    Map<String, String> errorMessages;
-    List<ResteasyConstraintViolation> propertyViolations;
-    List<ResteasyConstraintViolation> classViolations;
-    List<ResteasyConstraintViolation> parameterViolations;
-    List<ResteasyConstraintViolation> returnValueViolations;
-    Object entity;
+    private Response.Status status = Response.Status.OK;
+    private String created = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    private Map<String, String> errorMessages;
+    private List<ResteasyConstraintViolation> propertyViolations;
+    private List<ResteasyConstraintViolation> classViolations;
+    private List<ResteasyConstraintViolation> parameterViolations;
+    private List<ResteasyConstraintViolation> returnValueViolations;
+    private Object entity;
 
     public ResponseBuilder setStatus(Response.Status status) {
         this.status = status;
