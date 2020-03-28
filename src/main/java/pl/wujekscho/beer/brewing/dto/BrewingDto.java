@@ -1,10 +1,10 @@
-package pl.wujekscho.beer.dto;
+package pl.wujekscho.beer.brewing.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wujekscho.beer.validation.BrewingNameConstraint;
+import pl.wujekscho.beer.brewing.validation.BrewingNameConstraint;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;

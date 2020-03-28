@@ -1,4 +1,4 @@
-package pl.wujekscho.beer.entity;
+package pl.wujekscho.beer.brewing.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Getter;

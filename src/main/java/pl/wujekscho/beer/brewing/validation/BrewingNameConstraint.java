@@ -1,4 +1,4 @@
-package pl.wujekscho.beer.validation;
+package pl.wujekscho.beer.brewing.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

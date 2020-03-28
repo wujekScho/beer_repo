@@ -1,8 +1,8 @@
-package pl.wujekscho.beer.dto.mapper;
+package pl.wujekscho.beer.brewing.dto.mapper;
 
 import org.mapstruct.Mapper;
-import pl.wujekscho.beer.dto.BrewingDto;
-import pl.wujekscho.beer.entity.Brewing;
+import pl.wujekscho.beer.brewing.dto.BrewingDto;
+import pl.wujekscho.beer.brewing.entity.Brewing;
 
 
 @Mapper(componentModel = "cdi")

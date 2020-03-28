@@ -1,7 +1,7 @@
-package pl.wujekscho.beer.validation;
+package pl.wujekscho.beer.brewing.validation;
 
 import lombok.extern.slf4j.Slf4j;
-import pl.wujekscho.beer.service.BrewingService;
+import pl.wujekscho.beer.brewing.service.BrewingService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

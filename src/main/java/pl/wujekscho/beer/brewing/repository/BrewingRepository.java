@@ -1,7 +1,7 @@
-package pl.wujekscho.beer.repository;
+package pl.wujekscho.beer.brewing.repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
-import pl.wujekscho.beer.entity.Brewing;
+import pl.wujekscho.beer.brewing.entity.Brewing;
 
 import javax.enterprise.context.ApplicationScoped;
 

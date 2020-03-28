@@ -5,11 +5,11 @@ import io.restassured.http.ContentType;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import pl.wujekscho.beer.dto.BrewingDto;
+import pl.wujekscho.beer.brewing.dto.BrewingDto;
+import pl.wujekscho.beer.brewing.dto.mapper.BrewingMapper;
+import pl.wujekscho.beer.brewing.entity.Brewing;
+import pl.wujekscho.beer.brewing.service.BrewingService;
 import pl.wujekscho.beer.dto.ResponseBuilder;
-import pl.wujekscho.beer.dto.mapper.BrewingMapper;
-import pl.wujekscho.beer.entity.Brewing;
-import pl.wujekscho.beer.service.BrewingService;
 
 import javax.inject.Inject;
 
