@@ -21,7 +21,7 @@ public class GenericExceptionMapper implements ExceptionMapper<RuntimeException>
 
         if (exception instanceof NoDBResultException) {
             status = Response.Status.NOT_FOUND;
-            errorMessages.put("NoDBResultException", "Element not found in DB");
+            errorMessages.put("NoDBResultException", exception.getMessage());
         } else {
             status = Response.Status.INTERNAL_SERVER_ERROR;
             errorMessages.put(exception.getClass().getSimpleName(), exception.getMessage());
