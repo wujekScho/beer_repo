@@ -6,7 +6,7 @@ import pl.wujekscho.beer.brewing.entity.Brewing;
 import pl.wujekscho.beer.brewing.service.BrewingService;
 import pl.wujekscho.beer.dto.ResponseBuilder;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Path("/brewings")
-@ApplicationScoped
+@RequestScoped
 @Transactional
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
