@@ -1,4 +1,4 @@
-package pl.wujekscho.beer.brewing.validation;
+package pl.wujekscho.beer.security.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -7,10 +7,10 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER,
         ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = BrewingNameValidator.class)
+@Constraint(validatedBy = LoginValidator.class)
 @Documented
-public @interface BrewingNameConstraint {
-    String message() default "Brewing with passed name already exist.";
+public @interface Login {
+    String message() default "Login already taken.";
 
     Class<?>[] groups() default {};
 

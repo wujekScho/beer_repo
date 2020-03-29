@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wujekscho.beer.brewing.validation.BrewingNameConstraint;
+import pl.wujekscho.beer.brewing.validation.BrewingName;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -16,7 +16,7 @@ import javax.validation.constraints.Positive;
 public class BrewingDto {
     private Long id;
     @NotNull
-    @BrewingNameConstraint
+    @BrewingName
     private String name;
     private String style;
     @NotNull

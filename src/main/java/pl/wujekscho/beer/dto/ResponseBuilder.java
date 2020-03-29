@@ -19,7 +19,7 @@ import java.util.Map;
 @ToString
 public class ResponseBuilder {
     private Response.Status status = Response.Status.OK;
-    private String created = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    private String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     private Map<String, String> errorMessages;
     private List<ResteasyConstraintViolation> propertyViolations;
     private List<ResteasyConstraintViolation> classViolations;

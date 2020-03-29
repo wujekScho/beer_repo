@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 
 @Slf4j
 @ApplicationScoped
-public class BrewingNameValidator implements ConstraintValidator<BrewingNameConstraint, String> {
+public class BrewingNameValidator implements ConstraintValidator<BrewingName, String> {
     @Inject
     BrewingService brewingService;
 

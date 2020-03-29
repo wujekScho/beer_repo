@@ -1,5 +1,6 @@
 package pl.wujekscho.beer.brewing.controller;
 
+import io.quarkus.security.Authenticated;
 import pl.wujekscho.beer.brewing.dto.BrewingDto;
 import pl.wujekscho.beer.brewing.dto.mapper.BrewingMapper;
 import pl.wujekscho.beer.brewing.entity.Brewing;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 @Transactional
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Authenticated
 public class BrewingController {
     @Inject
     BrewingService brewingService;

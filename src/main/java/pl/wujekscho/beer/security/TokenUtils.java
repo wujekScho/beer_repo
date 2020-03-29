@@ -3,6 +3,8 @@ package pl.wujekscho.beer.security;
 import io.smallrye.jwt.build.Jwt;
 import io.smallrye.jwt.build.JwtClaimsBuilder;
 import org.eclipse.microprofile.jwt.Claims;
+import org.eclipse.microprofile.jwt.JsonWebToken;
+import pl.wujekscho.beer.security.entity.User;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -11,24 +13,45 @@ import java.security.PrivateKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class TokenUtils {
+    private static final long EXPIRES_IN_SECONDS = 300;
+
     private TokenUtils() {
     }
 
-    public static String generateTokenString() throws Exception {
+    public static String generateTokenString(User authenticated) throws Exception {
         String kid = "/privateKey.pem";
         PrivateKey pk = readPrivateKey(kid);
 
         JwtClaimsBuilder claims = Jwt.claims();
-        claims.issuer("https://quarkus.io/using-jwt-rbac");
-        claims.upn("schodziak@gmail.com");
-        claims.groups(Stream.of("admin", "user").collect(Collectors.toSet()));
-
+        claims.issuer("piotr.schodzinski");
+        claims.upn(authenticated.getLogin());
+        claims.groups(authenticated.getRoles().stream()
+                .map(Enum::name)
+                .collect(Collectors.toSet()));
 
         long currentTimeInSecs = currentTimeInSecs();
-        long exp = currentTimeInSecs + 300;
+        long exp = currentTimeInSecs + EXPIRES_IN_SECONDS;
+
+        claims.issuedAt(currentTimeInSecs);
+        claims.claim(Claims.auth_time.name(), currentTimeInSecs);
+        claims.expiresAt(exp);
+
+        return claims.jws().signatureKeyId(kid).sign(pk);
+    }
+
+    public static String refreshToken(JsonWebToken token) throws Exception {
+        String kid = "/privateKey.pem";
+        PrivateKey pk = readPrivateKey(kid);
+
+        JwtClaimsBuilder claims = Jwt.claims();
+        claims.issuer("piotr.schodzinski");
+        claims.upn(token.getName());
+        claims.groups(token.getGroups());
+
+        long currentTimeInSecs = currentTimeInSecs();
+        long exp = currentTimeInSecs + EXPIRES_IN_SECONDS;
 
         claims.issuedAt(currentTimeInSecs);
         claims.claim(Claims.auth_time.name(), currentTimeInSecs);
