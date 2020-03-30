@@ -3,7 +3,9 @@ package pl.wujekscho.beer.exception.mapper;
 import lombok.extern.slf4j.Slf4j;
 import pl.wujekscho.beer.dto.ResponseBuilder;
 import pl.wujekscho.beer.exception.IncorrectLoginException;
+import pl.wujekscho.beer.exception.InvalidActivationTokenException;
 import pl.wujekscho.beer.exception.NoDBResultException;
+import pl.wujekscho.beer.exception.NotActivatedUserException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -19,16 +21,16 @@ public class GenericExceptionMapper implements ExceptionMapper<RuntimeException>
 
         Response.Status status = Response.Status.BAD_REQUEST;
         HashMap<String, String> errorMessages = new HashMap<>();
+        errorMessages.put(exception.getClass().getSimpleName(), exception.getMessage());
 
         if (exception instanceof NoDBResultException) {
             status = Response.Status.NOT_FOUND;
-            errorMessages.put("NoDBResultException", exception.getMessage());
-        } else if (exception instanceof IncorrectLoginException) {
+        } else if (exception instanceof IncorrectLoginException || exception instanceof NotActivatedUserException) {
             status = Response.Status.UNAUTHORIZED;
-            errorMessages.put(exception.getClass().getSimpleName(), exception.getMessage());
+        } else if (exception instanceof InvalidActivationTokenException) {
+
         } else {
             status = Response.Status.INTERNAL_SERVER_ERROR;
-            errorMessages.put(exception.getClass().getSimpleName(), exception.getMessage());
         }
 
         return new ResponseBuilder()

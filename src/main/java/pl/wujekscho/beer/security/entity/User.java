@@ -30,4 +30,5 @@ public class User extends PanacheEntityBase {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "role")
     public Set<Role> roles;
+    public boolean activated;
 }

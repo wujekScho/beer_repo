@@ -8,6 +8,7 @@ import pl.wujekscho.beer.security.TokenUtils;
 import pl.wujekscho.beer.security.dto.LoginRequest;
 import pl.wujekscho.beer.security.dto.RegistrationRequest;
 import pl.wujekscho.beer.security.entity.User;
+import pl.wujekscho.beer.security.service.ActivationService;
 import pl.wujekscho.beer.security.service.AuthorizationService;
 
 import javax.annotation.security.PermitAll;
@@ -15,6 +16,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -32,6 +34,9 @@ public class AuthorizationController {
     @Inject
     AuthorizationService authorizationService;
 
+    @Inject
+    ActivationService activationService;
+
     @POST
     @Path("/login")
     @PermitAll
@@ -47,9 +52,19 @@ public class AuthorizationController {
     @Path("/register")
     @PermitAll
     public Response register(@Valid RegistrationRequest request) {
-        authorizationService.registerUser(request.getLogin(), request.getPassword());
+        User user = authorizationService.registerUser(request.getLogin(), request.getPassword());
         return new ResponseBuilder()
                 .setStatus(Response.Status.CREATED)
+                .buildResponse();
+    }
+
+    @GET
+    @Path("/confirm-registration/{token}")
+    @PermitAll
+    public Response confirmRegistration(@NotNull @PathParam("token") String token) {
+        activationService.confirmRegistration(token);
+        return new ResponseBuilder()
+                .setStatus(Response.Status.OK)
                 .buildResponse();
     }
 

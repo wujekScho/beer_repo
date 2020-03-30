@@ -4,11 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.jboss.resteasy.api.validation.ResteasyConstraintViolation;
+import pl.wujekscho.beer.utils.Time;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.Map;
 @ToString
 public class ResponseBuilder {
     private Response.Status status = Response.Status.OK;
-    private String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    private String timestamp = Time.nowAtUtc().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     private Map<String, String> errorMessages;
     private List<ResteasyConstraintViolation> propertyViolations;
     private List<ResteasyConstraintViolation> classViolations;
