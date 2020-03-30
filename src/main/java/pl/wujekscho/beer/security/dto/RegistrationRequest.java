@@ -1,14 +1,18 @@
 package pl.wujekscho.beer.security.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.wujekscho.beer.security.validation.Login;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
-@Getter
-@Setter
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegistrationRequest {
     @Email
     @Login
