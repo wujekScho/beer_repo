@@ -1,16 +1,20 @@
 package pl.wujekscho.beer.brewing.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import pl.wujekscho.beer.yeast.entity.Yeast;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
-@ToString
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "brewings")
 public class Brewing extends PanacheEntityBase {
     @Id
@@ -18,6 +22,9 @@ public class Brewing extends PanacheEntityBase {
     public Long id;
     @Column(unique = true)
     public String name;
+    @ManyToOne
+    public Yeast yeast;
+    public LocalDateTime timestamp;
     public String style;
     public Double gravity;
     public Double volume;

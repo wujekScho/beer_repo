@@ -1,12 +1,12 @@
 package pl.wujekscho.beer.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.jboss.resteasy.api.validation.ResteasyConstraintViolation;
 import pl.wujekscho.beer.utils.Time;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.format.DateTimeFormatter;
@@ -72,7 +72,7 @@ public class ResponseBuilder {
         return this;
     }
 
-    @JsonbTransient
+    @JsonIgnore
     public ResponseBuilder addErrorMessage(String error, String message) {
         if (errorMessages == null) {
             this.errorMessages = new LinkedHashMap<>();
@@ -81,7 +81,7 @@ public class ResponseBuilder {
         return this;
     }
 
-    @JsonbTransient
+    @JsonIgnore
     public Response buildResponse() {
         return Response
                 .status(this.status.getStatusCode())
