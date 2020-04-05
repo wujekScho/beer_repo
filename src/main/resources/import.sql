@@ -10,7 +10,7 @@ VALUES (1, 'test@test.org', 'Fermentis WB-06', false),
        (3, 'SafAle US-05', 'Fermentis WB-06', false),
        (4, 'SafAle S-33', 'Fermentis WB-06', false);
 
-INSERT INTO brewings (gravity, name, style, volume, timestamp, yeast_id)
-VALUES (10.0, 'Russian Tzar', 'Russian Imperial Stout', 20.0, '2020-04-04 16:16:38.000000', 1),
-       (15.0, 'Pani z Ameryki', 'American IPA', 20.0, '2020-04-04 16:16:38.000000', 2);
+INSERT INTO brewings (gravity, name, style, volume, created, yeast_id, user_id)
+VALUES (10.0, 'Russian Tzar', 'Russian Imperial Stout', 20.0, '2020-04-04 16:16:38.000000', 1, 1),
+       (15.0, 'Pani z Ameryki', 'American IPA', 20.0, '2020-04-04 16:16:38.000000', 2, 1);
 

@@ -5,12 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.wujekscho.beer.brewing.validation.BrewingName;
+import pl.wujekscho.beer.security.dto.UserDto;
 import pl.wujekscho.beer.utils.LocalDateTimeSerializer;
 import pl.wujekscho.beer.yeast.dto.YeastDto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,17 +17,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class BrewingDto {
     private Long id;
-    @NotNull
-    @BrewingName
     private String name;
     private String style;
-    @NotNull
-    @Positive
     private Double gravity;
-    @NotNull
-    @Positive
     private Double volume;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
-    private LocalDateTime timestamp;
+    private LocalDateTime created;
     private YeastDto yeast;
+    private UserDto user;
 }

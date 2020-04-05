@@ -15,7 +15,7 @@ import java.util.Base64;
 import java.util.stream.Collectors;
 
 public class TokenUtils {
-    private static final long EXPIRES_IN_SECONDS = 300;
+    private static final long EXPIRES_IN_SECONDS = 900;
 
     private TokenUtils() {
     }
@@ -30,6 +30,7 @@ public class TokenUtils {
         claims.groups(authenticated.getRoles().stream()
                 .map(Enum::name)
                 .collect(Collectors.toSet()));
+        claims.claim("userId", authenticated.getId());
 
         long currentTimeInSecs = currentTimeInSecs();
         long exp = currentTimeInSecs + EXPIRES_IN_SECONDS;

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.wujekscho.beer.security.entity.User;
+import pl.wujekscho.beer.utils.Time;
 import pl.wujekscho.beer.yeast.entity.Yeast;
 
 import javax.persistence.*;
@@ -20,12 +22,24 @@ public class Brewing extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     public String name;
     @ManyToOne
     public Yeast yeast;
-    public LocalDateTime timestamp;
+    @ManyToOne
+    public User user;
+    @Column(nullable = false)
+    public LocalDateTime created;
+    @Column(nullable = false)
     public String style;
+    @Column(nullable = false)
     public Double gravity;
+    @Column(nullable = false)
     public Double volume;
+
+
+    @PrePersist
+    public void prePersist() {
+        this.created = Time.nowAtUtc();
+    }
 }

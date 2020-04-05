@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import pl.wujekscho.beer.brewing.entity.Brewing;
 import pl.wujekscho.beer.brewing.repository.BrewingRepository;
 import pl.wujekscho.beer.exception.NoDBResultException;
+import pl.wujekscho.beer.security.entity.User;
+import pl.wujekscho.beer.security.repository.UserRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -17,6 +19,9 @@ public class BrewingService {
     @Inject
     BrewingRepository brewingRepository;
 
+    @Inject
+    UserRepository userRepository;
+
     public List<Brewing> getAll() {
         List<Brewing> list = brewingRepository.findAll().list();
         if (list.isEmpty()) {
@@ -26,7 +31,9 @@ public class BrewingService {
         return list;
     }
 
-    public Brewing save(Brewing brewing) {
+    public Brewing save(Brewing brewing, Long userId) {
+        User creator = userRepository.findById(userId);
+        brewing.setUser(creator);
         brewingRepository.persist(brewing);
         log.info("Successfully persisted brewing: {}", brewing);
         return brewing;

@@ -1,7 +1,9 @@
 package pl.wujekscho.beer.brewing.controller;
 
 import io.quarkus.security.Authenticated;
+import org.eclipse.microprofile.jwt.Claim;
 import pl.wujekscho.beer.brewing.dto.BrewingDto;
+import pl.wujekscho.beer.brewing.dto.BrewingRequest;
 import pl.wujekscho.beer.brewing.dto.mapper.BrewingMapper;
 import pl.wujekscho.beer.brewing.entity.Brewing;
 import pl.wujekscho.beer.brewing.service.BrewingService;
@@ -31,6 +33,10 @@ public class BrewingController {
     @Inject
     BrewingMapper brewingMapper;
 
+    @Inject
+    @Claim("userId")
+    Long userId;
+
     @GET
     public Response getAll() {
         List<BrewingDto> dtos = brewingService.getAll().stream()
@@ -51,12 +57,12 @@ public class BrewingController {
     }
 
     @POST
-    public Response save(@Valid BrewingDto dto) {
-        Brewing entity = brewingMapper.toEntity(dto);
-        Brewing brewing = brewingService.save(entity);
+    public Response save(@Valid BrewingRequest dto) {
+        Brewing entity = brewingMapper.fromRequestToEntity(dto);
+        Brewing brewing = brewingService.save(entity, userId);
         return new ResponseBuilder()
                 .setStatus(Response.Status.CREATED)
-                .setEntity(brewing)
+                .setEntity(brewingMapper.toDto(brewing))
                 .buildResponse();
     }
 

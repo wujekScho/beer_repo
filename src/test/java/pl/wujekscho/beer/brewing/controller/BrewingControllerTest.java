@@ -5,7 +5,7 @@ import io.restassured.http.ContentType;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import pl.wujekscho.beer.brewing.dto.BrewingDto;
+import pl.wujekscho.beer.brewing.dto.BrewingRequest;
 import pl.wujekscho.beer.brewing.dto.mapper.BrewingMapper;
 import pl.wujekscho.beer.brewing.entity.Brewing;
 import pl.wujekscho.beer.brewing.service.BrewingService;
@@ -32,7 +32,7 @@ class BrewingControllerTest {
 
     @Test
     public void testSaveEndpoint() {
-        BrewingDto dto = getTestBrewing();
+        BrewingRequest dto = getTestBrewing();
 
         given()
                 .header(authorizationService.getAuthHeader())
@@ -45,8 +45,8 @@ class BrewingControllerTest {
 
     @Test
     public void testSaveEndpointForNotUniqueBrewingName() {
-        BrewingDto dto = getTestBrewing();
-        brewingService.save(brewingMapper.toEntity(dto));
+        BrewingRequest dto = getTestBrewing();
+        brewingService.save(brewingMapper.fromRequestToEntity(dto), 1L);
 
         ResponseBuilder response = given()
                 .header(authorizationService.getAuthHeader())
@@ -63,8 +63,8 @@ class BrewingControllerTest {
 
     @Test
     public void testDeleteEndpoint() {
-        BrewingDto dto = getTestBrewing();
-        brewingService.save(brewingMapper.toEntity(dto));
+        BrewingRequest dto = getTestBrewing();
+        brewingService.save(brewingMapper.fromRequestToEntity(dto), 1L);
         Long brewingId = brewingService.getByName("Test name").getId();
 
         given()
@@ -75,12 +75,13 @@ class BrewingControllerTest {
                 .statusCode(204);
     }
 
-    private BrewingDto getTestBrewing() {
-        return BrewingDto.builder()
+    private BrewingRequest getTestBrewing() {
+        return BrewingRequest.builder()
                 .name("Test name")
                 .gravity(10.0)
                 .volume(20.0)
                 .style("Bitter")
+                .yeastId(1L)
                 .build();
     }
 
