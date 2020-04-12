@@ -1,4 +1,4 @@
-# beer-repo project
+# beer-repo
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
