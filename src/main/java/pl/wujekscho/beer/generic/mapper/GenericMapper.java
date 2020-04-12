@@ -1,4 +1,4 @@
-package pl.wujekscho.beer.mapper;
+package pl.wujekscho.beer.generic.mapper;
 
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Named;

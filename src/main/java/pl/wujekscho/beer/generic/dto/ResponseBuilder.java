@@ -1,4 +1,4 @@
-package pl.wujekscho.beer.dto;
+package pl.wujekscho.beer.generic.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

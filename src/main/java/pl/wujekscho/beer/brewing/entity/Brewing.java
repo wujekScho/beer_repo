@@ -37,7 +37,6 @@ public class Brewing extends PanacheEntityBase {
     @Column(nullable = false)
     public Double volume;
 
-
     @PrePersist
     public void prePersist() {
         this.created = Time.nowAtUtc();

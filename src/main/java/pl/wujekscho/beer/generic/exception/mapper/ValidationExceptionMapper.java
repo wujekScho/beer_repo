@@ -1,7 +1,7 @@
-package pl.wujekscho.beer.exception.mapper;
+package pl.wujekscho.beer.generic.exception.mapper;
 
 import lombok.extern.slf4j.Slf4j;
-import pl.wujekscho.beer.dto.ResponseBuilder;
+import pl.wujekscho.beer.generic.dto.ResponseBuilder;
 
 import javax.validation.ValidationException;
 import javax.ws.rs.core.Response;

@@ -6,10 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.wujekscho.beer.security.dto.UserDto;
-import pl.wujekscho.beer.utils.LocalDateTimeSerializer;
+import pl.wujekscho.beer.utils.ZonedDateTimeSerializer;
 import pl.wujekscho.beer.yeast.dto.YeastDto;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Data
 @Builder
@@ -21,8 +21,8 @@ public class BrewingDto {
     private String style;
     private Double gravity;
     private Double volume;
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    private LocalDateTime created;
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
+    private ZonedDateTime created;
     private YeastDto yeast;
     private UserDto user;
 }

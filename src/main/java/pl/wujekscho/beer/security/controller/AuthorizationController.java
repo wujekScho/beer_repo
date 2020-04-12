@@ -3,7 +3,7 @@ package pl.wujekscho.beer.security.controller;
 import io.quarkus.security.Authenticated;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.jwt.JsonWebToken;
-import pl.wujekscho.beer.dto.ResponseBuilder;
+import pl.wujekscho.beer.generic.dto.ResponseBuilder;
 import pl.wujekscho.beer.security.TokenUtils;
 import pl.wujekscho.beer.security.dto.LoginRequest;
 import pl.wujekscho.beer.security.dto.RegistrationRequest;
@@ -52,7 +52,7 @@ public class AuthorizationController {
     @Path("/register")
     @PermitAll
     public Response register(@Valid RegistrationRequest request) {
-        User user = authorizationService.registerUser(request.getLogin(), request.getPassword());
+        User user = authorizationService.registerUser(request.getLogin(), request.getPassword(), request.getTimeZoneId());
         return new ResponseBuilder()
                 .setStatus(Response.Status.CREATED)
                 .buildResponse();

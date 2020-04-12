@@ -5,11 +5,13 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import pl.wujekscho.beer.time.zone.entity.TimeZone;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;
+
 
 @Entity
 @Table(name = "users")
@@ -31,4 +33,7 @@ public class User extends PanacheEntityBase {
     @Column(name = "role")
     public Set<Role> roles;
     public boolean activated;
+    @ManyToOne
+    @JoinColumn(name = "time_zone_id", referencedColumnName = "id")
+    public TimeZone timeZone;
 }

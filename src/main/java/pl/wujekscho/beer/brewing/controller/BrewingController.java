@@ -1,13 +1,15 @@
 package pl.wujekscho.beer.brewing.controller;
 
 import io.quarkus.security.Authenticated;
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.jwt.Claim;
 import pl.wujekscho.beer.brewing.dto.BrewingDto;
 import pl.wujekscho.beer.brewing.dto.BrewingRequest;
 import pl.wujekscho.beer.brewing.dto.mapper.BrewingMapper;
 import pl.wujekscho.beer.brewing.entity.Brewing;
 import pl.wujekscho.beer.brewing.service.BrewingService;
-import pl.wujekscho.beer.dto.ResponseBuilder;
+import pl.wujekscho.beer.generic.controller.BaseResource;
+import pl.wujekscho.beer.generic.dto.ResponseBuilder;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -26,7 +28,8 @@ import java.util.stream.Collectors;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Authenticated
-public class BrewingController {
+@Slf4j
+public class BrewingController extends BaseResource {
     @Inject
     BrewingService brewingService;
 
@@ -40,7 +43,7 @@ public class BrewingController {
     @GET
     public Response getAll() {
         List<BrewingDto> dtos = brewingService.getAll().stream()
-                .map(brewing -> brewingMapper.toDto(brewing))
+                .map(brewing -> brewingMapper.toDto(brewing, getUserTimezone()))
                 .collect(Collectors.toList());
         return new ResponseBuilder()
                 .setEntity(dtos)
@@ -50,7 +53,7 @@ public class BrewingController {
     @GET
     @Path("/{brewingId}")
     public Response getById(@PathParam("brewingId") @Positive Long brewingId) {
-        BrewingDto dto = brewingMapper.toDto(brewingService.getById(brewingId));
+        BrewingDto dto = brewingMapper.toDto(brewingService.getById(brewingId), getUserTimezone());
         return new ResponseBuilder()
                 .setEntity(dto)
                 .buildResponse();
@@ -62,7 +65,7 @@ public class BrewingController {
         Brewing brewing = brewingService.save(entity, userId);
         return new ResponseBuilder()
                 .setStatus(Response.Status.CREATED)
-                .setEntity(brewingMapper.toDto(brewing))
+                .setEntity(brewingMapper.toDto(brewing, getUserTimezone()))
                 .buildResponse();
     }
 

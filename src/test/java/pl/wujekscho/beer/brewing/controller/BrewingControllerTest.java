@@ -9,7 +9,7 @@ import pl.wujekscho.beer.brewing.dto.BrewingRequest;
 import pl.wujekscho.beer.brewing.dto.mapper.BrewingMapper;
 import pl.wujekscho.beer.brewing.entity.Brewing;
 import pl.wujekscho.beer.brewing.service.BrewingService;
-import pl.wujekscho.beer.dto.ResponseBuilder;
+import pl.wujekscho.beer.generic.dto.ResponseBuilder;
 import service.TestAuthorizationService;
 
 import javax.inject.Inject;

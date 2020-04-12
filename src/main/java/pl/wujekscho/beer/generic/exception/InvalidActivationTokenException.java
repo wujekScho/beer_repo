@@ -1,4 +1,4 @@
-package pl.wujekscho.beer.exception;
+package pl.wujekscho.beer.generic.exception;
 
 public class InvalidActivationTokenException extends RuntimeException {
     private InvalidActivationTokenException() {

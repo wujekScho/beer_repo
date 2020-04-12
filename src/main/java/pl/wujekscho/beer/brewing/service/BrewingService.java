@@ -3,7 +3,7 @@ package pl.wujekscho.beer.brewing.service;
 import lombok.extern.slf4j.Slf4j;
 import pl.wujekscho.beer.brewing.entity.Brewing;
 import pl.wujekscho.beer.brewing.repository.BrewingRepository;
-import pl.wujekscho.beer.exception.NoDBResultException;
+import pl.wujekscho.beer.generic.exception.NoDBResultException;
 import pl.wujekscho.beer.security.entity.User;
 import pl.wujekscho.beer.security.repository.UserRepository;
 

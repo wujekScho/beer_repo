@@ -8,6 +8,7 @@ import pl.wujekscho.beer.security.validation.Login;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 
 @Data
 @Builder
@@ -20,4 +21,6 @@ public class RegistrationRequest {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$",
             message = "Password must contain at least 8 characters, one letter, one number and one special character.")
     private String password;
+    @Positive
+    private Long timeZoneId;
 }

@@ -4,17 +4,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
 import pl.wujekscho.beer.email.dto.EmailEvent;
 import pl.wujekscho.beer.email.entity.EmailType;
-import pl.wujekscho.beer.exception.IncorrectLoginException;
-import pl.wujekscho.beer.exception.NotActivatedUserException;
+import pl.wujekscho.beer.generic.exception.IncorrectLoginException;
+import pl.wujekscho.beer.generic.exception.NotActivatedUserException;
 import pl.wujekscho.beer.security.dto.LoginRequest;
 import pl.wujekscho.beer.security.entity.Role;
 import pl.wujekscho.beer.security.entity.User;
 import pl.wujekscho.beer.security.repository.UserRepository;
+import pl.wujekscho.beer.time.zone.service.TimeZoneService;
 import pl.wujekscho.beer.utils.Time;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.validation.constraints.Positive;
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -26,6 +28,9 @@ public class AuthorizationService {
     ActivationService activationService;
 
     @Inject
+    TimeZoneService timeZoneService;
+
+    @Inject
     UserRepository userRepository;
 
     @Inject
@@ -35,12 +40,13 @@ public class AuthorizationService {
         return userRepository.find("login", login).count() == 0;
     }
 
-    public User registerUser(String login, String password) {
+    public User registerUser(String login, String password, @Positive Long timeZoneId) {
         User user = new User();
         user.setLogin(login);
         user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
         user.setRoles(new HashSet<>(Collections.singletonList(Role.REGULAR_USER)));
         user.setActivated(false);
+        user.setTimeZone(timeZoneService.getById(timeZoneId));
         userRepository.persist(user);
 
         String token = activationService.generateToken(user);

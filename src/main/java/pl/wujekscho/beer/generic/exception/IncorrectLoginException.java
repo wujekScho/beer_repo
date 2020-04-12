@@ -1,4 +1,4 @@
-package pl.wujekscho.beer.exception;
+package pl.wujekscho.beer.generic.exception;
 
 public class IncorrectLoginException extends RuntimeException {
     public IncorrectLoginException() {

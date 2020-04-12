@@ -31,6 +31,7 @@ public class TokenUtils {
                 .map(Enum::name)
                 .collect(Collectors.toSet()));
         claims.claim("userId", authenticated.getId());
+        claims.claim("zone", authenticated.getTimeZone().tzdbId);
 
         long currentTimeInSecs = currentTimeInSecs();
         long exp = currentTimeInSecs + EXPIRES_IN_SECONDS;

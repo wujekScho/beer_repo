@@ -1,11 +1,11 @@
-package pl.wujekscho.beer.exception.mapper;
+package pl.wujekscho.beer.generic.exception.mapper;
 
 import lombok.extern.slf4j.Slf4j;
-import pl.wujekscho.beer.dto.ResponseBuilder;
-import pl.wujekscho.beer.exception.IncorrectLoginException;
-import pl.wujekscho.beer.exception.InvalidActivationTokenException;
-import pl.wujekscho.beer.exception.NoDBResultException;
-import pl.wujekscho.beer.exception.NotActivatedUserException;
+import pl.wujekscho.beer.generic.dto.ResponseBuilder;
+import pl.wujekscho.beer.generic.exception.IncorrectLoginException;
+import pl.wujekscho.beer.generic.exception.InvalidActivationTokenException;
+import pl.wujekscho.beer.generic.exception.NoDBResultException;
+import pl.wujekscho.beer.generic.exception.NotActivatedUserException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

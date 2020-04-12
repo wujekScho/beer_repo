@@ -1,7 +1,7 @@
 package pl.wujekscho.beer.security.service;
 
 import lombok.extern.slf4j.Slf4j;
-import pl.wujekscho.beer.exception.InvalidActivationTokenException;
+import pl.wujekscho.beer.generic.exception.InvalidActivationTokenException;
 import pl.wujekscho.beer.security.entity.ActivationToken;
 import pl.wujekscho.beer.security.entity.User;
 import pl.wujekscho.beer.security.repository.ActivationTokenRepository;

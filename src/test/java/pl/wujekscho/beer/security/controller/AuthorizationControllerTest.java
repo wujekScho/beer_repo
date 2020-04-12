@@ -5,7 +5,7 @@ import io.restassured.http.ContentType;
 import lombok.extern.slf4j.Slf4j;
 import org.jboss.resteasy.api.validation.ResteasyConstraintViolation;
 import org.junit.jupiter.api.Test;
-import pl.wujekscho.beer.dto.ResponseBuilder;
+import pl.wujekscho.beer.generic.dto.ResponseBuilder;
 import pl.wujekscho.beer.security.dto.LoginRequest;
 import pl.wujekscho.beer.security.dto.RegistrationRequest;
 import service.TestAuthorizationService;
