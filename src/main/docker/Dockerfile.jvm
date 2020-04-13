@@ -11,7 +11,7 @@
 #
 # Then run the container using:
 #
-# docker run -i -d --name beer-repo --net=bridge -p 8080:8080 --restart always quarkus/beer-repo-jvm
+# docker run -i -d --name beer-repo --net=bridge -p 8080:8081 --restart always quarkus/beer-repo-jvm
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1
