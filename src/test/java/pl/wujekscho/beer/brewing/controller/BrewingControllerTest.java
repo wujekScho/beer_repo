@@ -38,7 +38,7 @@ class BrewingControllerTest {
                 .header(authorizationService.getAuthHeader())
                 .contentType(ContentType.JSON)
                 .body(dto)
-                .when().post("/brewings")
+                .when().post("/api/brewings")
                 .then()
                 .statusCode(201);
     }
@@ -52,7 +52,7 @@ class BrewingControllerTest {
                 .header(authorizationService.getAuthHeader())
                 .contentType(ContentType.JSON)
                 .body(dto)
-                .when().post("/brewings")
+                .when().post("/api/brewings")
                 .then()
                 .statusCode(400)
                 .extract()
@@ -70,7 +70,7 @@ class BrewingControllerTest {
         given()
                 .header(authorizationService.getAuthHeader())
                 .pathParam("brewingId", brewingId)
-                .when().delete("/brewings/{brewingId}")
+                .when().delete("/api/brewings/{brewingId}")
                 .then()
                 .statusCode(204);
     }
