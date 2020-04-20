@@ -46,7 +46,7 @@ class BrewingControllerTest {
     @Test
     public void testSaveEndpointForNotUniqueBrewingName() {
         BrewingRequest dto = getTestBrewing();
-        brewingService.save(brewingMapper.fromRequestToEntity(dto), 1L);
+        brewingService.save(brewingMapper.fromRequestToEntity(dto));
 
         ResponseBuilder response = given()
                 .header(authorizationService.getAuthHeader())
@@ -64,7 +64,7 @@ class BrewingControllerTest {
     @Test
     public void testDeleteEndpoint() {
         BrewingRequest dto = getTestBrewing();
-        brewingService.save(brewingMapper.fromRequestToEntity(dto), 1L);
+        brewingService.save(brewingMapper.fromRequestToEntity(dto));
         Long brewingId = brewingService.getByName("Test name").getId();
 
         given()

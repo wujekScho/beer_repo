@@ -428,10 +428,12 @@ VALUES (21, 'America/New_York', 'US'),
 
 
 INSERT INTO users (id, login, password, activated, time_zone_id)
-VALUES (1, 'test@test.org', '$2a$10$4Xg9D6/EsIq0tDYbeeAM0eLXGXRAPy.NzVIlBvIPxG7JNH6Y2M6sK', true, 324);
+VALUES (1, 'test@test.org', '$2a$10$4Xg9D6/EsIq0tDYbeeAM0eLXGXRAPy.NzVIlBvIPxG7JNH6Y2M6sK', true, 324),
+       (2, 'test2@test.org', '$2a$10$4Xg9D6/EsIq0tDYbeeAM0eLXGXRAPy.NzVIlBvIPxG7JNH6Y2M6sK', true, 324);
 
 INSERT INTO user_roles (id, role)
-VALUES (1, 'REGULAR_USER');
+VALUES (1, 'REGULAR_USER'),
+       (2, 'REGULAR_USER');
 
 INSERT INTO yeasts (id, addedBy, name, pending)
 VALUES (1, 'test@test.org', 'Fermentis WB-06', false),
@@ -441,5 +443,6 @@ VALUES (1, 'test@test.org', 'Fermentis WB-06', false),
 
 INSERT INTO brewings (gravity, name, style, volume, created, yeast_id, user_id)
 VALUES (10.0, 'Russian Tzar', 'Russian Imperial Stout', 20.0, '2020-04-04 16:16:38.000000', 1, 1),
-       (15.0, 'Pani z Ameryki', 'American IPA', 20.0, '2020-04-04 16:16:38.000000', 2, 1);
+       (15.0, 'Pani z Ameryki', 'American IPA', 20.0, '2020-04-04 16:16:38.000000', 2, 1),
+       (20.0, 'Atak chmielu', 'American IPA', 20.0, '2020-04-04 16:16:38.000000', 2, 2);
 

@@ -1,6 +1,7 @@
 package pl.wujekscho.beer.brewing.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.microprofile.jwt.Claim;
 import pl.wujekscho.beer.brewing.entity.Brewing;
 import pl.wujekscho.beer.brewing.repository.BrewingRepository;
 import pl.wujekscho.beer.generic.exception.NoDBResultException;
@@ -22,8 +23,14 @@ public class BrewingService {
     @Inject
     UserRepository userRepository;
 
+    @Inject
+    @Claim("userId")
+    Long userId;
+
     public List<Brewing> getAll() {
-        List<Brewing> list = brewingRepository.findAll().list();
+        List<Brewing> list = brewingRepository
+                .find("user_id", userId)
+                .list();
         if (list.isEmpty()) {
             log.warn("No brewing found.");
             throw new NoDBResultException();
@@ -31,8 +38,9 @@ public class BrewingService {
         return list;
     }
 
-    public Brewing save(Brewing brewing, Long userId) {
-        User creator = userRepository.findById(userId);
+    public Brewing save(Brewing brewing) {
+        User creator = userRepository
+                .findById(userId);
         brewing.setUser(creator);
         brewingRepository.persist(brewing);
         log.info("Successfully persisted brewing: {}", brewing);
@@ -40,12 +48,10 @@ public class BrewingService {
     }
 
     public Brewing getById(Long brewingId) {
-        Brewing byId = brewingRepository.findById(brewingId);
-        if (byId == null) {
-            log.warn("No brewing found of id: {}", brewingId);
-            throw new NoDBResultException();
-        }
-        return byId;
+        return brewingRepository
+                .find("id = ?1 and user_id = ?2", brewingId, userId)
+                .firstResultOptional()
+                .orElseThrow(NoDBResultException::new);
     }
 
     public boolean isBrewingNameTaken(String name) {
