@@ -70,8 +70,7 @@ class AuthorizationControllerTest {
                 .map(ResteasyConstraintViolation::getMessage)
                 .collect(Collectors.toSet());
 
-        assertTrue(messages.containsAll(Arrays.asList("must not be blank",
-                "must be a well-formed email address")));
+        assertTrue(messages.containsAll(Arrays.asList("must not be blank")));
     }
 
     @Test
