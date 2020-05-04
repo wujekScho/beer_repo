@@ -18,7 +18,7 @@ public class RegistrationRequest {
     @Email
     @Login
     private String login;
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$",
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){8,16}$",
             message = "Password must contain at least 8 characters, one letter, one number and one special character.")
     private String password;
     @Positive
