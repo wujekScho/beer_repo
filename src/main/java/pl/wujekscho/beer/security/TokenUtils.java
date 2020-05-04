@@ -15,7 +15,7 @@ import java.util.Base64;
 import java.util.stream.Collectors;
 
 public class TokenUtils {
-    private static final long EXPIRES_IN_SECONDS = 900000;
+    private static final long EXPIRES_IN_SECONDS = 600;
 
     private TokenUtils() {
     }
