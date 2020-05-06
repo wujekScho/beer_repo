@@ -102,6 +102,13 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-vault</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-jms-client-bom</artifactId>
+            <version>16.0.0.Final</version>
+            <type>pom</type>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

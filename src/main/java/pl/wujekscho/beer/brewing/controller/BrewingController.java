@@ -9,6 +9,8 @@ import pl.wujekscho.beer.brewing.entity.Brewing;
 import pl.wujekscho.beer.brewing.service.BrewingService;
 import pl.wujekscho.beer.generic.controller.BaseResource;
 import pl.wujekscho.beer.generic.dto.ResponseBuilder;
+import pl.wujekscho.beer.jms.AlertEventQueueManager;
+import pl.wujekscho.beer.jms.UsageAlertEvent;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -34,6 +36,18 @@ public class BrewingController extends BaseResource {
 
     @Inject
     BrewingMapper brewingMapper;
+
+    @Inject
+    AlertEventQueueManager queueManager;
+
+    @GET
+    @Path("/jms")
+    public void testQueue() {
+        queueManager.send(UsageAlertEvent.builder()
+                .lineBillingUsageId(10000L)
+                .simBillingUsageId(10000L)
+                .build());
+    }
 
     @GET
     public Response getAll() {
