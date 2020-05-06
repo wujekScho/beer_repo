@@ -1,6 +1,5 @@
 package pl.wujekscho.beer.time.zone.controller;
 
-import io.quarkus.security.Authenticated;
 import lombok.extern.slf4j.Slf4j;
 import pl.wujekscho.beer.generic.dto.ResponseBuilder;
 import pl.wujekscho.beer.time.zone.dto.TimeZoneDto;
@@ -23,7 +22,6 @@ import java.util.Map;
 @Transactional
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Authenticated
 @Slf4j
 public class TimeZoneController {
     @Inject
