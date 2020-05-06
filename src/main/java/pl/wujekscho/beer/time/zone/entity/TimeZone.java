@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-public class TimeZone extends PanacheEntityBase {
+public class TimeZone extends PanacheEntityBase implements Comparable<TimeZone> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
@@ -20,4 +20,10 @@ public class TimeZone extends PanacheEntityBase {
     public String tzdbId;
     @Column(nullable = false)
     public String country;
+
+
+    @Override
+    public int compareTo(TimeZone timeZone) {
+        return this.id.compareTo(timeZone.id);
+    }
 }
