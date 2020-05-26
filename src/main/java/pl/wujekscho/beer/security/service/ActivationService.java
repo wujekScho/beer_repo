@@ -1,11 +1,12 @@
 package pl.wujekscho.beer.security.service;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import pl.wujekscho.beer.generic.exception.InvalidActivationTokenException;
 import pl.wujekscho.beer.security.entity.ActivationToken;
 import pl.wujekscho.beer.security.entity.User;
 import pl.wujekscho.beer.security.repository.ActivationTokenRepository;
-import pl.wujekscho.beer.security.repository.UserRepository;
 import pl.wujekscho.beer.utils.Time;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -14,12 +15,12 @@ import java.util.UUID;
 
 @Slf4j
 @ApplicationScoped
+@NoArgsConstructor
+@AllArgsConstructor
 public class ActivationService {
     @Inject
     ActivationTokenRepository tokenRepository;
 
-    @Inject
-    UserRepository userRepository;
 
     public String generateToken(User user) {
         ActivationToken token = ActivationToken.builder()
