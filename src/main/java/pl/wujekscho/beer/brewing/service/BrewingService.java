@@ -1,5 +1,7 @@
 package pl.wujekscho.beer.brewing.service;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.jwt.Claim;
 import pl.wujekscho.beer.brewing.entity.Brewing;
@@ -16,6 +18,8 @@ import java.util.List;
 @ApplicationScoped
 @Slf4j
 @Transactional
+@NoArgsConstructor
+@AllArgsConstructor
 public class BrewingService {
     @Inject
     BrewingRepository brewingRepository;
