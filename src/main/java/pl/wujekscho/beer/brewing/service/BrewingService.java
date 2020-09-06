@@ -45,6 +45,9 @@ public class BrewingService {
     public Brewing save(Brewing brewing) {
         User creator = userRepository
                 .findById(userId);
+        if (creator == null) {
+            throw new NoDBResultException("Did not found user of id: {}" + userId);
+        }
         brewing.setUser(creator);
         brewingRepository.persist(brewing);
         log.info("Successfully persisted brewing: {}", brewing);
